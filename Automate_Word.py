@@ -4,7 +4,6 @@ from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 import os
 import docx2pdf
-from tqdm import tqdm
 
 def set_font(paragraph, font_name="Calibri", font_size=11, font_bold=False, font_underline=False):
     """Sets the font and size for a given paragraph."""
