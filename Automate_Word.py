@@ -3,7 +3,8 @@ from docx.shared import Pt
 from docx.oxml.ns import qn
 from docx.oxml import OxmlElement
 import os
-import win32com.client  # For Word to PDF conversion (on Windows only)
+import docx2pdf
+from tqdm import tqdm
 
 def set_font(paragraph, font_name="Calibri", font_size=11, font_bold=False, font_underline=False):
     """Sets the font and size for a given paragraph."""
@@ -81,11 +82,7 @@ def convert_to_pdf(word_file):
     word = None
     try:
         # Launch Word application
-        word = win32com.client.Dispatch("Word.Application")
-        doc = word.Documents.Open(word_file)
-        # Save as PDF
-        doc.SaveAs(pdf_file, FileFormat=17)  # 17 is the code for PDF format
-        doc.Close()
+        docx2pdf.convert(word_file, pdf_file)
         print(f"PDF saved at: {pdf_file}")
     except Exception as e:
         print(f"An error occurred during Word to PDF conversion: {e}")
